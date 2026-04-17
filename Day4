@@ -1,0 +1,53 @@
+# -------- Step 1: Tools --------
+
+def web_search(query):
+    print("Searching on web...")
+    return "Result: Latest info about " + query
+
+def summarize(text):
+    print("Summarizing text...")
+    words = text.split()
+    short = " ".join(words[:15])   # take first 15 words
+    return "Summary: " + short
+
+def notes(text):
+    print("Creating notes...")
+    return "Title: Notes\nContent: " + text
+
+
+# -------- Step 2: Agent --------
+
+def agent(user_input):
+
+    if "news" in user_input:
+        print("Tool used: web_search")
+        result = web_search(user_input)
+
+    elif "summarize" in user_input:
+        print("Tool used: summarize")
+        text = user_input.replace("summarize", "")
+        result = summarize(text)
+
+    elif "notes" in user_input:
+        print("Tool used: notes")
+        result = notes(user_input)
+
+    else:
+        result = "Final Answer: Sorry, I don't know"
+
+    return result
+
+
+# -------- Step 3: Test --------
+
+print("\nTest 1")
+q1 = "latest news on OpenAI"
+print(agent(q1))
+
+print("\nTest 2")
+q2 = "summarize AI is very useful in daily life and many companies use it"
+print(agent(q2))
+
+print("\nTest 3")
+q3 = "latest news on AI and summarize"
+print(agent(q3))
