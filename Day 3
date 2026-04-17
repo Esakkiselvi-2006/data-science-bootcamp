@@ -1,0 +1,41 @@
+# Import
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# -------------------
+# Load data
+# -------------------
+url = "https://raw.githubusercontent.com/nunnarilabs/ml/master/house/kc_house_data.csv"
+df = pd.read_csv(url)
+
+print(df.head())
+
+# -------------------
+# Data Cleaning
+# -------------------
+print(df.isnull().sum())   # check missing
+
+df = df.dropna()           # remove missing
+
+# -------------------
+# Correlation
+# -------------------
+corr = df.corr(numeric_only=True)
+print(corr)
+
+# -------------------
+# Heatmap
+# -------------------
+plt.figure(figsize=(8,6))
+sns.heatmap(corr, cmap='coolwarm')
+plt.show()
+
+# -------------------
+# Scatter Plot
+# -------------------
+plt.scatter(df['sqft_living'], df['price'])
+plt.xlabel("sqft_living")
+plt.ylabel("price")
+plt.title("Size vs Price")
+plt.show()
